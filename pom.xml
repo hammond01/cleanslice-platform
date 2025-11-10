@@ -49,22 +49,24 @@
         <module>common-libs/common-test</module>
         <module>services/gateway-service</module>
         <module>services/identity</module>
+        
+        <!-- Files Service - Multi-module (to be simplified later) -->
         <module>services/files-service/files-domain</module>
         <module>services/files-service/files-application</module>
         <module>services/files-service/files-adapters-in-rest</module>
         <module>services/files-service/files-adapters-out-jpa</module>
         <module>services/files-service/files-adapters-out-s3</module>
         <module>services/files-service/files-adapters-out-kafka</module>
+        
+        <!-- Audit Service - Multi-module (kept for learning) -->
         <module>services/audit-service/audit-domain</module>
         <module>services/audit-service/audit-application</module>
         <module>services/audit-service/audit-adapters-in-rest</module>
         <module>services/audit-service/audit-adapters-out-jpa</module>
         <module>services/audit-service/audit-adapters-in-kafka</module>
-        <module>services/product-service/product-domain</module>
-        <module>services/product-service/product-application</module>
-        <module>services/product-service/product-adapters-in-rest</module>
-        <module>services/product-service/product-adapters-out-jpa</module>
-        <module>services/product-service/product-adapters-out-kafka</module>
+        
+        <!-- Product Service - Single module (simplified) -->
+        <module>services/product-service</module>
     </modules>
 
     <dependencyManagement>
@@ -293,29 +295,11 @@
                 <artifactId>audit-adapters-in-kafka</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
+            <!-- Product Service - Single module -->
             <dependency>
                 <groupId>dev.cleanslice</groupId>
-                <artifactId>product-domain</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>dev.cleanslice</groupId>
-                <artifactId>product-application</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>dev.cleanslice</groupId>
-                <artifactId>product-adapters-in-rest</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>dev.cleanslice</groupId>
-                <artifactId>product-adapters-out-jpa</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>dev.cleanslice</groupId>
-                <artifactId>product-adapters-out-kafka</artifactId>
+                <artifactId>product-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
         </dependencies>

@@ -13,13 +13,10 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-/**
- * Adapter that implements ProductRepositoryPort using JPA.
- * This is the infrastructure implementation of the port defined in application layer.
- * 
- * Key pattern: Domain depends on Port (interface), this adapter implements the Port.
- * Domain never knows about JPA - that's hexagonal architecture in action!
- */
+/// Adapter that implements ProductRepositoryPort using JPA.
+/// This is the infrastructure implementation of the port defined in application layer.
+/// Key pattern: Domain depends on Port (interface), this adapter implements the Port.
+/// Domain never knows about JPA - that's hexagonal architecture in action!
 @Component
 public class ProductRepositoryAdapter implements ProductRepositoryPort {
 

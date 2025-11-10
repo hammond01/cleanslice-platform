@@ -1,14 +1,13 @@
 package dev.cleanslice.platform.product.domain;
 
+import lombok.Getter;
+
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Product domain model - Pure POJO without infrastructure dependencies
- * No JPA annotations here - this is the business domain model
- */
+@Getter
 public class Product {
 
     private UUID id;
@@ -16,9 +15,9 @@ public class Product {
     private String name;
     private String description;
     private ProductStatus status;
-    private List<Variant> variants;
-    private List<Media> mediaList;
-    private Instant createdAt;
+    private final List<Variant> variants;
+    private final List<Media> mediaList;
+    private final Instant createdAt;
     private Instant updatedAt;
 
     // Default constructor
@@ -54,20 +53,11 @@ public class Product {
         this.updatedAt = updatedAt;
     }
 
-    // Business methods
     public void publish() {
         if (this.status == ProductStatus.PUBLISHED) {
             throw new IllegalStateException("Product is already published");
         }
         this.status = ProductStatus.PUBLISHED;
-        this.updatedAt = Instant.now();
-    }
-
-    public void addVariant(Variant variant) {
-        if (variant == null) {
-            throw new IllegalArgumentException("Variant cannot be null");
-        }
-        this.variants.add(variant);
         this.updatedAt = Instant.now();
     }
 
@@ -79,63 +69,32 @@ public class Product {
         this.updatedAt = Instant.now();
     }
 
-    public void updateBasicInfo(String name, String description) {
+    public void addVariant(Variant variant) {
+        if (variant == null) {
+            throw new IllegalArgumentException("Variant cannot be null");
+        }
+        this.variants.add(variant);
+        this.updatedAt = Instant.now();
+    }
+
+    // Selective setters for mutable business fields
+    public void setName(String name) {
         this.name = name;
+        this.updatedAt = Instant.now();
+    }
+
+    public void setDescription(String description) {
         this.description = description;
         this.updatedAt = Instant.now();
     }
 
-    // Getters
-    public UUID getId() {
-        return id;
-    }
-
-    public UUID getOwnerId() {
-        return ownerId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public ProductStatus getStatus() {
-        return status;
-    }
-
+    // Defensive copy getters
     public List<Variant> getVariants() {
-        return new ArrayList<>(variants); // Defensive copy
+        return new ArrayList<>(variants);
     }
 
     public List<Media> getMediaList() {
         return new ArrayList<>(mediaList); // Defensive copy
     }
 
-    public Instant getCreatedAt() {
-        return createdAt;
-    }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    // Setters (package-private for reconstruction)
-    void setId(UUID id) {
-        this.id = id;
-    }
-
-    void setStatus(ProductStatus status) {
-        this.status = status;
-    }
-
-    void setVariants(List<Variant> variants) {
-        this.variants = new ArrayList<>(variants);
-    }
-
-    void setMediaList(List<Media> mediaList) {
-        this.mediaList = new ArrayList<>(mediaList);
-    }
 }

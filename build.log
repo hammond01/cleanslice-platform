@@ -1,0 +1,689 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] CleanSlice Platform                                                [pom]
+[INFO] Common Core                                                        [jar]
+[INFO] Common Infrastructure                                              [jar]
+[INFO] Common Events                                                      [jar]
+[INFO] Common Test                                                        [jar]
+[INFO] Gateway Service                                                    [jar]
+[INFO] Identity                                                           [pom]
+[INFO] Files Domain                                                       [jar]
+[INFO] Files Application                                                  [jar]
+[INFO] Files JPA Adapter                                                  [jar]
+[INFO] Files S3 Adapter                                                   [jar]
+[INFO] Files REST Adapter                                                 [jar]
+[INFO] Files Kafka Adapter                                                [jar]
+[INFO] Audit Domain                                                       [jar]
+[INFO] Audit Application                                                  [jar]
+[INFO] Audit JPA Adapter                                                  [jar]
+[INFO] Audit Kafka Adapter                                                [jar]
+[INFO] Audit REST Adapter                                                 [jar]
+[INFO] Product Domain                                                     [jar]
+[INFO] Product JPA Adapter                                                [jar]
+[INFO] Product Application                                                [jar]
+[INFO] Product REST Adapter                                               [jar]
+[INFO] Product Kafka Adapter                                              [jar]
+[INFO] 
+[INFO] Using the MultiThreadedBuilder implementation with a thread count of 12
+[INFO] 
+[INFO] -----------------< dev.cleanslice:cleanslice-platform >-----------------
+[INFO] Building CleanSlice Platform 1.0.0-SNAPSHOT                       [1/23]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ cleanslice-platform ---
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ cleanslice-platform ---
+[INFO] Installing F:\JAVA\cleanslice-platform\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\cleanslice-platform\1.0.0-SNAPSHOT\cleanslice-platform-1.0.0-SNAPSHOT.pom
+[INFO] 
+[INFO] 
+[INFO] ---------------------< dev.cleanslice:common-core >---------------------
+[INFO] --------------------< dev.cleanslice:common-infra >---------------------
+[INFO] 
+[INFO] Building Common Infrastructure 1.0.0-SNAPSHOT                     [3/23]
+[INFO] --------------------< dev.cleanslice:common-events >--------------------
+[INFO] Building Common Core 1.0.0-SNAPSHOT                               [2/23]
+[INFO] 
+[INFO]   from common-libs\common-core\pom.xml
+[INFO]   from common-libs\common-infra\pom.xml
+[INFO] Building Common Events 1.0.0-SNAPSHOT                             [4/23]
+[INFO] 
+[INFO]   from common-libs\common-events\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] ---------------------< dev.cleanslice:common-test >---------------------
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] ----------------------< dev.cleanslice:identity >-----------------------
+[INFO] Building Identity 1.0.0-SNAPSHOT                                  [6/23]
+[INFO]   from services\identity\pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] Building Common Test 1.0.0-SNAPSHOT                               [5/23]
+[INFO]   from common-libs\common-test\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ identity ---
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ identity ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\identity\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\identity\1.0.0-SNAPSHOT\identity-1.0.0-SNAPSHOT.pom
+[INFO] 
+[INFO] 
+[INFO] 
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ common-events ---
+[INFO] --- clean:3.4.1:clean (default-clean) @ common-test ---
+[INFO] --- clean:3.4.1:clean (default-clean) @ common-infra ---
+[INFO] --- clean:3.4.1:clean (default-clean) @ common-core ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\common-libs\common-infra\target
+[INFO] Deleting F:\JAVA\cleanslice-platform\common-libs\common-events\target
+[INFO] Deleting F:\JAVA\cleanslice-platform\common-libs\common-test\target
+[INFO] Deleting F:\JAVA\cleanslice-platform\common-libs\common-core\target
+[INFO] 
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ common-test ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ common-infra ---
+[INFO] --- resources:3.3.1:resources (default-resources) @ common-core ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ common-events ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-events\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-core\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-infra\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-core\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-test\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-infra\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-events\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-test\src\main\resources
+[INFO] 
+[INFO] 
+[INFO] 
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ common-infra ---
+[INFO] --- compiler:3.13.0:compile (default-compile) @ common-events ---
+[INFO] --- compiler:3.13.0:compile (default-compile) @ common-test ---
+[INFO] --- compiler:3.13.0:compile (default-compile) @ common-core ---
+[INFO] No sources to compile
+[INFO] No sources to compile
+[INFO] No sources to compile
+[INFO] 
+[INFO] 
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ common-core ---
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ common-infra ---
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ common-test ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-infra\src\test\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-core\src\test\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-test\src\test\resources
+[INFO] 
+[INFO] 
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ common-test ---
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ common-core ---
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ common-infra ---
+[INFO] No sources to compile
+[INFO] No sources to compile
+[INFO] No sources to compile
+[INFO] 
+[INFO] 
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ common-core ---
+[INFO] --- surefire:3.5.3:test (default-test) @ common-infra ---
+[INFO] --- surefire:3.5.3:test (default-test) @ common-test ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 3 source files with javac [debug parameters release 21] to target\classes
+[INFO] Tests are skipped.
+[INFO] Tests are skipped.
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ common-test ---
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ common-core ---
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ common-infra ---
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[INFO] Building jar: F:\JAVA\cleanslice-platform\common-libs\common-core\target\common-core-1.0.0-SNAPSHOT.jar
+[INFO] Building jar: F:\JAVA\cleanslice-platform\common-libs\common-test\target\common-test-1.0.0-SNAPSHOT.jar
+[INFO] Building jar: F:\JAVA\cleanslice-platform\common-libs\common-infra\target\common-infra-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] 
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ common-core ---
+[INFO] --- install:3.1.4:install (default-install) @ common-test ---
+[INFO] --- install:3.1.4:install (default-install) @ common-infra ---
+[INFO] Installing F:\JAVA\cleanslice-platform\common-libs\common-core\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\common-core\1.0.0-SNAPSHOT\common-core-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\common-libs\common-test\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\common-test\1.0.0-SNAPSHOT\common-test-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\common-libs\common-infra\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\common-infra\1.0.0-SNAPSHOT\common-infra-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\common-libs\common-core\target\common-core-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\common-core\1.0.0-SNAPSHOT\common-core-1.0.0-SNAPSHOT.jar
+[INFO] Installing F:\JAVA\cleanslice-platform\common-libs\common-infra\target\common-infra-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\common-infra\1.0.0-SNAPSHOT\common-infra-1.0.0-SNAPSHOT.jar
+[INFO] Installing F:\JAVA\cleanslice-platform\common-libs\common-test\target\common-test-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\common-test\1.0.0-SNAPSHOT\common-test-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ common-events ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\common-libs\common-events\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ common-events ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ common-events ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ common-events ---
+[INFO] Building jar: F:\JAVA\cleanslice-platform\common-libs\common-events\target\common-events-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -------------------< dev.cleanslice:gateway-service >-------------------
+[INFO] Building Gateway Service 1.0.0-SNAPSHOT                           [7/23]
+[INFO]   from services\gateway-service\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ common-events ---
+[INFO] Installing F:\JAVA\cleanslice-platform\common-libs\common-events\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\common-events\1.0.0-SNAPSHOT\common-events-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\common-libs\common-events\target\common-events-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\common-events\1.0.0-SNAPSHOT\common-events-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] 
+[INFO] --------------------< dev.cleanslice:audit-domain >---------------------
+[INFO] Building Audit Domain 1.0.0-SNAPSHOT                              [8/23]
+[INFO] 
+[INFO]   from services\audit-service\audit-domain\pom.xml
+[INFO] -------------------< dev.cleanslice:product-domain >--------------------
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Building Product Domain 1.0.0-SNAPSHOT                            [9/23]
+[INFO]   from services\product-service\product-domain\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] --------------------< dev.cleanslice:files-domain >---------------------
+[INFO] Building Files Domain 1.0.0-SNAPSHOT                             [10/23]
+[INFO]   from services\files-service\files-domain\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ files-domain ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\files-service\files-domain\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ files-domain ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-domain\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-domain\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ files-domain ---
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ audit-domain ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\audit-service\audit-domain\target
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ audit-domain ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\audit-service\audit-domain\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\audit-service\audit-domain\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ audit-domain ---
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ product-domain ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\product-service\product-domain\target
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ product-domain ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-domain\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-domain\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ product-domain ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ gateway-service ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\gateway-service\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ gateway-service ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ gateway-service ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ audit-domain ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\audit-service\audit-domain\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ audit-domain ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ audit-domain ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ audit-domain ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ files-domain ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-domain\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ files-domain ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ files-domain ---
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\audit-service\audit-domain\target\audit-domain-1.0.0-SNAPSHOT.jar
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ files-domain ---
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\files-service\files-domain\target\files-domain-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ audit-domain ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\audit-service\audit-domain\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\audit-domain\1.0.0-SNAPSHOT\audit-domain-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\services\audit-service\audit-domain\target\audit-domain-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\audit-domain\1.0.0-SNAPSHOT\audit-domain-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ files-domain ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\files-service\files-domain\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\files-domain\1.0.0-SNAPSHOT\files-domain-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\services\files-service\files-domain\target\files-domain-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\files-domain\1.0.0-SNAPSHOT\files-domain-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ product-domain ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-domain\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ product-domain ---
+[INFO] 
+[INFO] ------------------< dev.cleanslice:audit-application >------------------
+[INFO] Building Audit Application 1.0.0-SNAPSHOT                        [11/23]
+[INFO] 
+[INFO] ---------------< dev.cleanslice:audit-adapters-out-jpa >----------------
+[INFO] Building Audit JPA Adapter 1.0.0-SNAPSHOT                        [12/23]
+[INFO]   from services\audit-service\audit-adapters-out-jpa\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]   from services\audit-service\audit-application\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ product-domain ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ product-domain ---
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\product-service\product-domain\target\product-domain-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ product-domain ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\product-service\product-domain\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\product-domain\1.0.0-SNAPSHOT\product-domain-1.0.0-SNAPSHOT.pom
+[INFO] 
+[INFO] 
+[INFO] ---------------< dev.cleanslice:files-adapters-out-jpa >----------------
+[INFO] Building Files JPA Adapter 1.0.0-SNAPSHOT                        [13/23]
+[INFO] 
+[INFO] --------------< dev.cleanslice:files-adapters-out-kafka >---------------
+[INFO] Building Files Kafka Adapter 1.0.0-SNAPSHOT                      [14/23]
+[INFO]   from services\files-service\files-adapters-out-kafka\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] ------------------< dev.cleanslice:files-application >------------------
+[INFO] Building Files Application 1.0.0-SNAPSHOT                        [15/23]
+[INFO]   from services\files-service\files-application\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]   from services\files-service\files-adapters-out-jpa\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] ----------------< dev.cleanslice:files-adapters-out-s3 >----------------
+[INFO] Building Files S3 Adapter 1.0.0-SNAPSHOT                         [16/23]
+[INFO]   from services\files-service\files-adapters-out-s3\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] Installing F:\JAVA\cleanslice-platform\services\product-service\product-domain\target\product-domain-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\product-domain\1.0.0-SNAPSHOT\product-domain-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ audit-application ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\audit-service\audit-application\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ audit-application ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\audit-service\audit-application\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\audit-service\audit-application\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ audit-application ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ audit-application ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\audit-service\audit-application\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ audit-application ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ audit-application ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ audit-application ---
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\audit-service\audit-application\target\audit-application-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ audit-application ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\audit-service\audit-application\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\audit-application\1.0.0-SNAPSHOT\audit-application-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\services\audit-service\audit-application\target\audit-application-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\audit-application\1.0.0-SNAPSHOT\audit-application-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ audit-adapters-out-jpa ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\audit-service\audit-adapters-out-jpa\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ audit-adapters-out-jpa ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\audit-service\audit-adapters-out-jpa\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\audit-service\audit-adapters-out-jpa\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ audit-adapters-out-jpa ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --------------< dev.cleanslice:product-adapters-out-jpa >---------------
+[INFO] Building Product JPA Adapter 1.0.0-SNAPSHOT                      [17/23]
+[INFO]   from services\product-service\product-adapters-out-jpa\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] -------------< dev.cleanslice:product-adapters-out-kafka >--------------
+[INFO] Building Product Kafka Adapter 1.0.0-SNAPSHOT                    [18/23]
+[INFO]   from services\product-service\product-adapters-out-kafka\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ files-adapters-out-jpa ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-jpa\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ files-adapters-out-jpa ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-jpa\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-jpa\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ files-adapters-out-jpa ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 3 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ files-application ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\files-service\files-application\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ files-application ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-application\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-application\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ files-application ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ product-adapters-out-jpa ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-jpa\target
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ product-adapters-out-kafka ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-kafka\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ product-adapters-out-kafka ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-kafka\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-kafka\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ product-adapters-out-kafka ---
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ product-adapters-out-jpa ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ product-adapters-out-kafka ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-kafka\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ product-adapters-out-kafka ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-jpa\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-jpa\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ product-adapters-out-jpa ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ product-adapters-out-kafka ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ product-adapters-out-kafka ---
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target\classes
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-kafka\target\product-adapters-out-kafka-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ product-adapters-out-kafka ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-kafka\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\product-adapters-out-kafka\1.0.0-SNAPSHOT\product-adapters-out-kafka-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-kafka\target\product-adapters-out-kafka-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\product-adapters-out-kafka\1.0.0-SNAPSHOT\product-adapters-out-kafka-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ files-adapters-out-kafka ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-kafka\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ files-adapters-out-kafka ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-kafka\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-kafka\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ files-adapters-out-kafka ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ files-adapters-out-kafka ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-kafka\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ files-adapters-out-kafka ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ files-adapters-out-kafka ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ files-adapters-out-kafka ---
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ gateway-service ---
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-kafka\target\files-adapters-out-kafka-1.0.0-SNAPSHOT.jar
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\gateway-service\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ gateway-service ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ gateway-service ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ gateway-service ---
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ files-adapters-out-s3 ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-s3\target
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\gateway-service\target\gateway-service-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ files-adapters-out-s3 ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-s3\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-s3\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ files-adapters-out-s3 ---
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ audit-adapters-out-jpa ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\audit-service\audit-adapters-out-jpa\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ audit-adapters-out-jpa ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ audit-adapters-out-jpa ---
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ files-adapters-out-kafka ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target\classes
+[INFO] --- jar:3.4.2:jar (default-jar) @ audit-adapters-out-jpa ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-kafka\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\files-adapters-out-kafka\1.0.0-SNAPSHOT\files-adapters-out-kafka-1.0.0-SNAPSHOT.pom
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\audit-service\audit-adapters-out-jpa\target\audit-adapters-out-jpa-1.0.0-SNAPSHOT.jar
+[INFO] Installing F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-kafka\target\files-adapters-out-kafka-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\files-adapters-out-kafka\1.0.0-SNAPSHOT\files-adapters-out-kafka-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- spring-boot:3.5.0:repackage (repackage) @ gateway-service ---
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ audit-adapters-out-jpa ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\audit-service\audit-adapters-out-jpa\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\audit-adapters-out-jpa\1.0.0-SNAPSHOT\audit-adapters-out-jpa-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\services\audit-service\audit-adapters-out-jpa\target\audit-adapters-out-jpa-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\audit-adapters-out-jpa\1.0.0-SNAPSHOT\audit-adapters-out-jpa-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ---------------< dev.cleanslice:audit-adapters-in-kafka >---------------
+[INFO] Building Audit Kafka Adapter 1.0.0-SNAPSHOT                      [19/23]
+[INFO]   from services\audit-service\audit-adapters-in-kafka\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ product-adapters-out-jpa ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-jpa\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ product-adapters-out-jpa ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ product-adapters-out-jpa ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ product-adapters-out-jpa ---
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-jpa\target\product-adapters-out-jpa-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ files-adapters-out-jpa ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-jpa\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ files-adapters-out-jpa ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ files-adapters-out-jpa ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ files-adapters-out-jpa ---
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-jpa\target\files-adapters-out-jpa-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ audit-adapters-in-kafka ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\audit-service\audit-adapters-in-kafka\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ audit-adapters-in-kafka ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\audit-service\audit-adapters-in-kafka\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\audit-service\audit-adapters-in-kafka\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ audit-adapters-in-kafka ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ product-adapters-out-jpa ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-jpa\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\product-adapters-out-jpa\1.0.0-SNAPSHOT\product-adapters-out-jpa-1.0.0-SNAPSHOT.pom
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ files-adapters-out-jpa ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\product-service\product-adapters-out-jpa\target\product-adapters-out-jpa-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\product-adapters-out-jpa\1.0.0-SNAPSHOT\product-adapters-out-jpa-1.0.0-SNAPSHOT.jar
+[INFO] Installing F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-jpa\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\files-adapters-out-jpa\1.0.0-SNAPSHOT\files-adapters-out-jpa-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-jpa\target\files-adapters-out-jpa-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\files-adapters-out-jpa\1.0.0-SNAPSHOT\files-adapters-out-jpa-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ files-application ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-application\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ files-application ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ files-application ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ files-application ---
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\files-service\files-application\target\files-application-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -----------------< dev.cleanslice:product-application >-----------------
+[INFO] Building Product Application 1.0.0-SNAPSHOT                      [20/23]
+[INFO]   from services\product-service\product-application\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ files-application ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\files-service\files-application\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\files-application\1.0.0-SNAPSHOT\files-application-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\services\files-service\files-application\target\files-application-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\files-application\1.0.0-SNAPSHOT\files-application-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- clean:3.4.1:clean (default-clean) @ product-application ---
+[INFO] Deleting F:\JAVA\cleanslice-platform\services\product-service\product-application\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ product-application ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-application\src\main\resources
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-application\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ product-application ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ files-adapters-out-s3 ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-s3\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ files-adapters-out-s3 ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ files-adapters-out-s3 ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ files-adapters-out-s3 ---
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-s3\target\files-adapters-out-s3-1.0.0-SNAPSHOT.jar
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /F:/JAVA/cleanslice-platform/services/audit-service/audit-adapters-in-kafka/src/main/java/dev/cleanslice/platform/audit/adapters/in/kafka/AuditEventConsumer.java:[24,50] cannot find symbol
+  symbol:   method getType()
+  location: variable event of type dev.cleanslice.platform.common.events.FileUploadedEvent
+[ERROR] /F:/JAVA/cleanslice-platform/services/audit-service/audit-adapters-in-kafka/src/main/java/dev/cleanslice/platform/audit/adapters/in/kafka/AuditEventConsumer.java:[27,22] cannot find symbol
+  symbol:   method getType()
+  location: variable event of type dev.cleanslice.platform.common.events.FileUploadedEvent
+[ERROR] /F:/JAVA/cleanslice-platform/services/audit-service/audit-adapters-in-kafka/src/main/java/dev/cleanslice/platform/audit/adapters/in/kafka/AuditEventConsumer.java:[42,53] cannot find symbol
+  symbol:   method getType()
+  location: variable event of type dev.cleanslice.platform.common.events.ProductCreatedEvent
+[ERROR] /F:/JAVA/cleanslice-platform/services/audit-service/audit-adapters-in-kafka/src/main/java/dev/cleanslice/platform/audit/adapters/in/kafka/AuditEventConsumer.java:[45,22] cannot find symbol
+  symbol:   method getType()
+  location: variable event of type dev.cleanslice.platform.common.events.ProductCreatedEvent
+[INFO] 4 errors 
+[INFO] -------------------------------------------------------------
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ files-adapters-out-s3 ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-s3\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\files-adapters-out-s3\1.0.0-SNAPSHOT\files-adapters-out-s3-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\services\files-service\files-adapters-out-s3\target\files-adapters-out-s3-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\files-adapters-out-s3\1.0.0-SNAPSHOT\files-adapters-out-s3-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ product-application ---
+[INFO] skip non existing resourceDirectory F:\JAVA\cleanslice-platform\services\product-service\product-application\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ product-application ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.3:test (default-test) @ product-application ---
+[INFO] Tests are skipped.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ product-application ---
+[INFO] Building jar: F:\JAVA\cleanslice-platform\services\product-service\product-application\target\product-application-1.0.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ product-application ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\product-service\product-application\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\product-application\1.0.0-SNAPSHOT\product-application-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\services\product-service\product-application\target\product-application-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\product-application\1.0.0-SNAPSHOT\product-application-1.0.0-SNAPSHOT.jar
+[INFO] Replacing main artifact F:\JAVA\cleanslice-platform\services\gateway-service\target\gateway-service-1.0.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to F:\JAVA\cleanslice-platform\services\gateway-service\target\gateway-service-1.0.0-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- spring-boot:3.5.0:repackage (default) @ gateway-service ---
+[INFO] Replacing main artifact F:\JAVA\cleanslice-platform\services\gateway-service\target\gateway-service-1.0.0-SNAPSHOT.jar with repackaged archive, adding nested dependencies in BOOT-INF/.
+[INFO] The original artifact has been renamed to F:\JAVA\cleanslice-platform\services\gateway-service\target\gateway-service-1.0.0-SNAPSHOT.jar.original
+[INFO] 
+[INFO] --- install:3.1.4:install (default-install) @ gateway-service ---
+[INFO] Installing F:\JAVA\cleanslice-platform\services\gateway-service\pom.xml to C:\Users\Hammond\.m2\repository\dev\cleanslice\gateway-service\1.0.0-SNAPSHOT\gateway-service-1.0.0-SNAPSHOT.pom
+[INFO] Installing F:\JAVA\cleanslice-platform\services\gateway-service\target\gateway-service-1.0.0-SNAPSHOT.jar to C:\Users\Hammond\.m2\repository\dev\cleanslice\gateway-service\1.0.0-SNAPSHOT\gateway-service-1.0.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for CleanSlice Platform 1.0.0-SNAPSHOT:
+[INFO] 
+[INFO] CleanSlice Platform ................................ SUCCESS [  0.218 s]
+[INFO] Common Core ........................................ SUCCESS [  1.075 s]
+[INFO] Common Infrastructure .............................. SUCCESS [  1.076 s]
+[INFO] Common Events ...................................... SUCCESS [  1.175 s]
+[INFO] Common Test ........................................ SUCCESS [  1.075 s]
+[INFO] Gateway Service .................................... SUCCESS [  3.009 s]
+[INFO] Identity ........................................... SUCCESS [  0.014 s]
+[INFO] Files Domain ....................................... SUCCESS [  1.008 s]
+[INFO] Files Application .................................. SUCCESS [  1.255 s]
+[INFO] Files JPA Adapter .................................. SUCCESS [  1.121 s]
+[INFO] Files S3 Adapter ................................... SUCCESS [  1.496 s]
+[INFO] Files REST Adapter ................................. SKIPPED
+[INFO] Files Kafka Adapter ................................ SUCCESS [  0.702 s]
+[INFO] Audit Domain ....................................... SUCCESS [  0.927 s]
+[INFO] Audit Application .................................. SUCCESS [  0.286 s]
+[INFO] Audit JPA Adapter .................................. SUCCESS [  0.817 s]
+[INFO] Audit Kafka Adapter ................................ FAILURE [  0.611 s]
+[INFO] Audit REST Adapter ................................. SKIPPED
+[INFO] Product Domain ..................................... SUCCESS [  1.137 s]
+[INFO] Product JPA Adapter ................................ SUCCESS [  0.912 s]
+[INFO] Product Application ................................ SUCCESS [  0.587 s]
+[INFO] Product REST Adapter ............................... SKIPPED
+[INFO] Product Kafka Adapter .............................. SUCCESS [  0.378 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.866 s (Wall Clock)
+[INFO] Finished at: 2025-11-10T13:33:45+07:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project audit-adapters-in-kafka: Compilation failure: Compilation failure: 
+[ERROR] /F:/JAVA/cleanslice-platform/services/audit-service/audit-adapters-in-kafka/src/main/java/dev/cleanslice/platform/audit/adapters/in/kafka/AuditEventConsumer.java:[24,50] cannot find symbol
+[ERROR]   symbol:   method getType()
+[ERROR]   location: variable event of type dev.cleanslice.platform.common.events.FileUploadedEvent
+[ERROR] /F:/JAVA/cleanslice-platform/services/audit-service/audit-adapters-in-kafka/src/main/java/dev/cleanslice/platform/audit/adapters/in/kafka/AuditEventConsumer.java:[27,22] cannot find symbol
+[ERROR]   symbol:   method getType()
+[ERROR]   location: variable event of type dev.cleanslice.platform.common.events.FileUploadedEvent
+[ERROR] /F:/JAVA/cleanslice-platform/services/audit-service/audit-adapters-in-kafka/src/main/java/dev/cleanslice/platform/audit/adapters/in/kafka/AuditEventConsumer.java:[42,53] cannot find symbol
+[ERROR]   symbol:   method getType()
+[ERROR]   location: variable event of type dev.cleanslice.platform.common.events.ProductCreatedEvent
+[ERROR] /F:/JAVA/cleanslice-platform/services/audit-service/audit-adapters-in-kafka/src/main/java/dev/cleanslice/platform/audit/adapters/in/kafka/AuditEventConsumer.java:[45,22] cannot find symbol
+[ERROR]   symbol:   method getType()
+[ERROR]   location: variable event of type dev.cleanslice.platform.common.events.ProductCreatedEvent
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+[ERROR] 
+[ERROR] After correcting the problems, you can resume the build with the command
+[ERROR]   mvn <args> -rf :audit-adapters-in-kafka

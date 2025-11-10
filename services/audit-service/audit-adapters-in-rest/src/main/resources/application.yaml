@@ -1,0 +1,74 @@
+spring:
+  application:
+    name: audit-service
+  profiles:
+    active: dev
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+
+logging:
+  level:
+    dev.cleanslice.platform: DEBUG
+
+---
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/auditdb
+    username: audituser
+    password: auditpass
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+kafka:
+  bootstrap-servers: localhost:9092
+
+keycloak:
+  url: http://localhost:8080
+  realm: cleanslice
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+  datasource:
+    url: ${AUDIT_DB_URL}
+    username: ${AUDIT_DB_USER}
+    password: ${AUDIT_DB_PASS}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+kafka:
+  bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS}
+
+keycloak:
+  url: ${KEYCLOAK_URL}
+  realm: ${KEYCLOAK_REALM}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: mock
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.security.oauth2.resource.servlet.OAuth2ResourceServerAutoConfiguration

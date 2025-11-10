@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: files-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/files/**
+          filters:
+            - RewritePath=/api/files/(?<segment>.*), /api/files/$\{segment}
+        - id: audit-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/audit/**
+          filters:
+            - RewritePath=/api/audit/(?<segment>.*), /api/audit/$\{segment}
+        - id: product-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/products/**
+          filters:
+            - RewritePath=/api/products/(?<segment>.*), /api/products/$\{segment}
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+
+server:
+  port: 8081
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+
+---
+# Docker profile
+spring:
+  config:
+    activate:
+      on-profile: docker
+  cloud:
+    gateway:
+      routes:
+        - id: files-service
+          uri: http://files-service:8080
+          predicates:
+            - Path=/api/files/**
+        - id: audit-service
+          uri: http://audit-service:8080
+          predicates:
+            - Path=/api/audit/**
+        - id: product-service
+          uri: http://product-service:8080
+          predicates:
+            - Path=/api/products/**

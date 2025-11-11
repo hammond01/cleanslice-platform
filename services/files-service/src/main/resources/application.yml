@@ -1,0 +1,116 @@
+spring:
+  application:
+    name: files-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/filesdb
+    username: filesuser
+    password: filespass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: files-service
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+server:
+  port: 8082
+
+# MinIO/S3 Configuration
+storage:
+  s3:
+    endpoint: http://localhost:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+    bucket: files
+    region: us-east-1
+
+# Security (disabled by default)
+security:
+  enabled: false
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+---
+# Docker profile
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:postgresql://postgres-files:5432/filesdb
+  kafka:
+    bootstrap-servers: kafka:29092
+
+storage:
+  s3:
+    endpoint: http://minio:9000
+
+---
+# Mock profile (bypass security)
+spring:
+  config:
+    activate:
+      on-profile: mock
+
+security:
+  enabled: false
+
+---
+# Local development with H2 in-memory database
+spring:
+  config:
+    activate:
+      on-profile: dev-local
+  datasource:
+    url: jdbc:h2:mem:filesdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: true
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+
+storage:
+  s3:
+    endpoint: http://localhost:9000
+    access-key: minioadmin
+    secret-key: minioadmin
+    bucket: files-dev
+    region: us-east-1
+
+security:
+  enabled: false

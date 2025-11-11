@@ -50,20 +50,15 @@
         <module>services/gateway-service</module>
         <module>services/identity</module>
         
-        <!-- Files Service - Multi-module (to be simplified later) -->
-        <module>services/files-service/files-domain</module>
-        <module>services/files-service/files-application</module>
-        <module>services/files-service/files-adapters-in-rest</module>
-        <module>services/files-service/files-adapters-out-jpa</module>
-        <module>services/files-service/files-adapters-out-s3</module>
-        <module>services/files-service/files-adapters-out-kafka</module>
-        
         <!-- Audit Service - Multi-module (kept for learning) -->
         <module>services/audit-service/audit-domain</module>
         <module>services/audit-service/audit-application</module>
         <module>services/audit-service/audit-adapters-in-rest</module>
         <module>services/audit-service/audit-adapters-out-jpa</module>
         <module>services/audit-service/audit-adapters-in-kafka</module>
+        
+        <!-- Files Service - Single module (simplified) -->
+        <module>services/files-service</module>
         
         <!-- Product Service - Single module (simplified) -->
         <module>services/product-service</module>

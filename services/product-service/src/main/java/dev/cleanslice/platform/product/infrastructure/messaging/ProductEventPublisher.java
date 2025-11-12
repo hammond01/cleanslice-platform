@@ -4,6 +4,7 @@ import dev.cleanslice.platform.product.application.port.ProductEventPublisherPor
 import dev.cleanslice.platform.product.domain.Product;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Profile;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -13,8 +14,10 @@ import java.util.Map;
 /**
  * Kafka adapter for publishing product events.
  * Implements the port defined in application layer.
+ * Only active when NOT in dev-local profile.
  */
 @Component
+@Profile("!dev-local")
 public class ProductEventPublisher implements ProductEventPublisherPort {
 
     private static final Logger log = LoggerFactory.getLogger(ProductEventPublisher.class);

@@ -1,38 +1,18 @@
 version: '3.8'
 
 services:
-  postgres-files:
+  # Single PostgreSQL for all services
+  postgres:
     image: postgres:16
     environment:
-      POSTGRES_DB: filesdb
-      POSTGRES_USER: filesuser
-      POSTGRES_PASSWORD: filespass
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
     volumes:
-      - postgres_files_data:/var/lib/postgresql/data
-
-  postgres-audit:
-    image: postgres:16
-    environment:
-      POSTGRES_DB: auditdb
-      POSTGRES_USER: audituser
-      POSTGRES_PASSWORD: auditpass
-    ports:
-      - "5433:5432"
-    volumes:
-      - postgres_audit_data:/var/lib/postgresql/data
-
-  postgres-product:
-    image: postgres:16
-    environment:
-      POSTGRES_DB: productdb
-      POSTGRES_USER: productuser
-      POSTGRES_PASSWORD: productpass
-    ports:
-      - "5434:5432"
-    volumes:
-      - postgres_product_data:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-databases.sql:/docker-entrypoint-initdb.d/init-databases.sql
 
   minio:
     image: minio/minio:latest
@@ -157,9 +137,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
 
 volumes:
-  postgres_files_data:
-  postgres_audit_data:
-  postgres_product_data:
+  postgres_data:
   postgres_keycloak_data:
   minio_data:
   grafana_data:

@@ -3,8 +3,8 @@ spring:
     name: files-service
   datasource:
     url: jdbc:postgresql://localhost:5432/filesdb
-    username: filesuser
-    password: filespass
+    username: postgres
+    password: postgres
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

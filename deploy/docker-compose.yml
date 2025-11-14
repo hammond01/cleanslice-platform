@@ -27,7 +27,7 @@ services:
       - minio_data:/data
 
   kafka:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:7.5.0
     depends_on:
       - zookeeper
     ports:
@@ -43,7 +43,7 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:latest
+    image: confluentinc/cp-zookeeper:7.5.0
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
@@ -107,7 +107,7 @@ services:
     ports:
       - "8082:8080"
     depends_on:
-      - postgres-files
+      - postgres
       - minio
       - kafka
       - keycloak
@@ -119,7 +119,7 @@ services:
     ports:
       - "8083:8080"
     depends_on:
-      - postgres-audit
+      - postgres
       - kafka
       - keycloak
     environment:
@@ -130,7 +130,7 @@ services:
     ports:
       - "8084:8080"
     depends_on:
-      - postgres-product
+      - postgres
       - kafka
       - keycloak
     environment:

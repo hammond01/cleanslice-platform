@@ -1,4 +1,9 @@
+---
+# Default profile
 spring:
+  config:
+    activate:
+      on-profile: default
   application:
     name: gateway-service
   cloud:
@@ -9,19 +14,19 @@ spring:
           predicates:
             - Path=/api/files/**
           filters:
-            - RewritePath=/api/files/(?<segment>.*), /api/files/$\{segment}
+            - RewritePath=/api/files/(?<segment>.*), /api/files/\${segment}
         - id: audit-service
           uri: http://localhost:8083
           predicates:
             - Path=/api/audit/**
           filters:
-            - RewritePath=/api/audit/(?<segment>.*), /api/audit/$\{segment}
+            - RewritePath=/api/audit/(?<segment>.*), /api/audit/\${segment}
         - id: product-service
           uri: http://localhost:8084
           predicates:
             - Path=/api/products/**
           filters:
-            - RewritePath=/api/products/(?<segment>.*), /api/products/$\{segment}
+            - RewritePath=/api/products/(?<segment>.*), /api/products/\${segment}
       default-filters:
         - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
       globalcors:
@@ -38,7 +43,11 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,metrics,prometheus
+        include: health,info,metrics,prometheus,gateway
+  metrics:
+    export:
+      prometheus:
+        enabled: true
 
 ---
 # Docker profile
@@ -46,6 +55,11 @@ spring:
   config:
     activate:
       on-profile: docker
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: ${KEYCLOAK_URL:https://localhost:8080}/realms/${KEYCLOAK_REALM:cleanslice}/protocol/openid-connect/certs
   cloud:
     gateway:
       routes:

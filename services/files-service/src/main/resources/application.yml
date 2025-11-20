@@ -62,7 +62,7 @@ spring:
     activate:
       on-profile: docker
   datasource:
-    url: jdbc:postgresql://postgres-files:5432/filesdb
+    url: jdbc:postgresql://postgres:5432/filesdb
   kafka:
     bootstrap-servers: kafka:29092
 

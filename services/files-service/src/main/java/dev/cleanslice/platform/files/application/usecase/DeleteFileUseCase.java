@@ -2,7 +2,6 @@ package dev.cleanslice.platform.files.application.usecase;
 
 import dev.cleanslice.platform.files.application.port.FileEventPublisherPort;
 import dev.cleanslice.platform.files.application.port.FileRepositoryPort;
-import dev.cleanslice.platform.files.application.port.StoragePort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,14 +14,11 @@ import java.util.UUID;
 public class DeleteFileUseCase {
 
     private final FileRepositoryPort fileRepositoryPort;
-    private final StoragePort storagePort;
     private final FileEventPublisherPort eventPublisherPort;
 
     public DeleteFileUseCase(FileRepositoryPort fileRepositoryPort,
-                            StoragePort storagePort,
                             FileEventPublisherPort eventPublisherPort) {
         this.fileRepositoryPort = fileRepositoryPort;
-        this.storagePort = storagePort;
         this.eventPublisherPort = eventPublisherPort;
     }
 

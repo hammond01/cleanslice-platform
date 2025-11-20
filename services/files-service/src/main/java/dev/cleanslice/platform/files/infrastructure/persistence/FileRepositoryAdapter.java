@@ -4,7 +4,6 @@ import dev.cleanslice.platform.files.application.port.FileRepositoryPort;
 import dev.cleanslice.platform.files.domain.FileEntry;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -37,14 +36,19 @@ public class FileRepositoryAdapter implements FileRepositoryPort {
 
     @Override
     public List<FileEntry> findByOwnerId(UUID ownerId) {
-        // TODO: Implement when JpaRepository method is added
-        return Collections.emptyList();
+        return jpaRepository.findByOwnerId(ownerId).stream().map(mapper::toDomain).toList();
     }
 
     @Override
     public List<FileEntry> search(String name, String tag, String type) {
-        // TODO: Implement search functionality
-        return Collections.emptyList();
+        // Basic search on name and contentType (type maps to contentType here)
+        String searchName = (name == null) ? "" : name;
+        String searchContentType = (type == null) ? "" : type;
+        return jpaRepository
+                .findByNameContainingIgnoreCaseOrContentTypeContainingIgnoreCase(searchName, searchContentType)
+                .stream()
+                .map(mapper::toDomain)
+                .toList();
     }
 
     @Override

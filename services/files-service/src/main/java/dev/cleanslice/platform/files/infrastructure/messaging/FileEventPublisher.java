@@ -2,23 +2,22 @@ package dev.cleanslice.platform.files.infrastructure.messaging;
 
 import dev.cleanslice.platform.files.application.port.FileEventPublisherPort;
 import dev.cleanslice.platform.files.domain.FileEntry;
-import org.springframework.context.annotation.Profile;
+import dev.cleanslice.platform.common.events.FileUploadedEvent;
+import dev.cleanslice.platform.common.events.FileDeletedEvent;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 /**
  * Kafka implementation of FileEventPublisherPort.
- * Only active when NOT in dev-local profile.
  */
 @Component
-@Profile("!dev-local")
 public class FileEventPublisher implements FileEventPublisherPort {
 
-    private static final String TOPIC = "file-events";
+    private static final String TOPIC = "files.events.v1";
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     public FileEventPublisher(KafkaTemplate<String, Object> kafkaTemplate) {
@@ -27,25 +26,24 @@ public class FileEventPublisher implements FileEventPublisherPort {
 
     @Override
     public void publishFileUploaded(FileEntry fileEntry) {
-        Map<String, Object> event = new HashMap<>();
-        event.put("eventType", "FILE_UPLOADED");
-        event.put("fileId", fileEntry.getId().toString());
-        event.put("ownerId", fileEntry.getOwnerId().toString());
-        event.put("filename", fileEntry.getName());
-        event.put("size", fileEntry.getSize());
-        event.put("contentType", fileEntry.getContentType());
-        event.put("timestamp", fileEntry.getCreatedAt().toString());
+        var event = new FileUploadedEvent(
+            fileEntry.getId(),
+            fileEntry.getOwnerId(),
+            null,
+            fileEntry.getSize(),
+            fileEntry.getContentType()
+        );
 
-        kafkaTemplate.send(TOPIC, fileEntry.getId().toString(), event);
+        ProducerRecord<String, Object> rec = new ProducerRecord<>(TOPIC, fileEntry.getId().toString(), event);
+        rec.headers().add("__TypeId__", FileUploadedEvent.class.getName().getBytes(StandardCharsets.UTF_8));
+        kafkaTemplate.send(rec);
     }
 
     @Override
     public void publishFileDeleted(UUID fileId) {
-        Map<String, Object> event = new HashMap<>();
-        event.put("eventType", "FILE_DELETED");
-        event.put("fileId", fileId.toString());
-        event.put("timestamp", java.time.Instant.now().toString());
-
-        kafkaTemplate.send(TOPIC, fileId.toString(), event);
+        var event = new FileDeletedEvent(fileId, "deleted-by-user");
+        ProducerRecord<String, Object> rec = new ProducerRecord<>(TOPIC, fileId.toString(), event);
+        rec.headers().add("__TypeId__", FileDeletedEvent.class.getName().getBytes(StandardCharsets.UTF_8));
+        kafkaTemplate.send(rec);
     }
 }

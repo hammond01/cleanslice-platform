@@ -3,6 +3,7 @@ package dev.cleanslice.platform.files.infrastructure.rest;
 import dev.cleanslice.platform.files.application.usecase.DeleteFileUseCase;
 import dev.cleanslice.platform.files.application.usecase.GetDownloadUrlUseCase;
 import dev.cleanslice.platform.files.application.usecase.UploadFileUseCase;
+import dev.cleanslice.platform.files.application.port.FileRepositoryPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -27,13 +29,16 @@ public class FileController {
     private final UploadFileUseCase uploadFileUseCase;
     private final GetDownloadUrlUseCase getDownloadUrlUseCase;
     private final DeleteFileUseCase deleteFileUseCase;
+    private final FileRepositoryPort fileRepositoryPort;
 
     public FileController(UploadFileUseCase uploadFileUseCase,
                          GetDownloadUrlUseCase getDownloadUrlUseCase,
-                         DeleteFileUseCase deleteFileUseCase) {
+                         DeleteFileUseCase deleteFileUseCase,
+                         FileRepositoryPort fileRepositoryPort) {
         this.uploadFileUseCase = uploadFileUseCase;
         this.getDownloadUrlUseCase = getDownloadUrlUseCase;
         this.deleteFileUseCase = deleteFileUseCase;
+        this.fileRepositoryPort = fileRepositoryPort;
     }
 
     @PostMapping
@@ -87,5 +92,34 @@ public class FileController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/owner/{ownerId}")
+    @Operation(summary = "Get all files by owner")
+    public ResponseEntity<List<Map<String, Object>>> getFilesByOwner(@PathVariable UUID ownerId) {
+        var files = fileRepositoryPort.findByOwnerId(ownerId);
+        var results = files.stream().map(file -> Map.<String, Object>of(
+                "fileId", file.getId().toString(),
+                "filename", file.getName(),
+                "size", file.getSize(),
+                "contentType", file.getContentType(),
+                "createdAt", file.getCreatedAt().toString()
+        )).toList();
+        return ResponseEntity.ok(results);
+    }
+
+    @GetMapping("/search")
+    @Operation(summary = "Search files by name or type")
+    public ResponseEntity<List<Map<String, Object>>> searchFiles(@RequestParam(required = false) String name,
+                                                                 @RequestParam(required = false) String type) {
+        var files = fileRepositoryPort.search(name, null, type);
+        var results = files.stream().map(file -> Map.<String, Object>of(
+                "fileId", file.getId().toString(),
+                "filename", file.getName(),
+                "size", file.getSize(),
+                "contentType", file.getContentType(),
+                "createdAt", file.getCreatedAt().toString()
+        )).toList();
+        return ResponseEntity.ok(results);
     }
 }

@@ -10,4 +10,6 @@ import java.util.UUID;
  */
 @Repository
 public interface JpaFileRepository extends JpaRepository<FileEntryEntity, UUID> {
+	java.util.List<FileEntryEntity> findByOwnerId(UUID ownerId);
+	java.util.List<FileEntryEntity> findByNameContainingIgnoreCaseOrContentTypeContainingIgnoreCase(String name, String contentType);
 }

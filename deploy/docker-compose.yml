@@ -93,48 +93,48 @@ services:
     volumes:
       - grafana_data:/var/lib/grafana
 
-  gateway-service:
-    build: ../services/gateway-service
-    ports:
-      - "8081:8080"
-    depends_on:
-      - keycloak
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
+  # gateway-service:
+  #   build: ../services/gateway-service
+  #   ports:
+  #     - "8081:8080"
+  #   depends_on:
+  #     - keycloak
+  #   environment:
+  #     - SPRING_PROFILES_ACTIVE=docker
 
-  files-service:
-    build: ../services/files-service
-    ports:
-      - "8082:8080"
-    depends_on:
-      - postgres
-      - minio
-      - kafka
-      - keycloak
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
+  # files-service:
+  #   build: ../services/files-service
+  #   ports:
+  #     - "8082:8080"
+  #   depends_on:
+  #     - postgres
+  #     - minio
+  #     - kafka
+  #     - keycloak
+  #   environment:
+  #     - SPRING_PROFILES_ACTIVE=docker
 
-  audit-service:
-    build: ../services/audit-service
-    ports:
-      - "8083:8080"
-    depends_on:
-      - postgres
-      - kafka
-      - keycloak
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
+  # audit-service:
+  #   build: ../services/audit-service
+  #   ports:
+  #     - "8083:8080"
+  #   depends_on:
+  #     - postgres
+  #     - kafka
+  #     - keycloak
+  #   environment:
+  #     - SPRING_PROFILES_ACTIVE=docker
 
-  product-service:
-    build: ../services/product-service
-    ports:
-      - "8084:8080"
-    depends_on:
-      - postgres
-      - kafka
-      - keycloak
-    environment:
-      - SPRING_PROFILES_ACTIVE=docker
+  # product-service:
+  #   build: ../services/product-service
+  #   ports:
+  #     - "8084:8080"
+  #   depends_on:
+  #     - postgres
+  #     - kafka
+  #     - keycloak
+  #   environment:
+  #     - SPRING_PROFILES_ACTIVE=docker
 
 volumes:
   postgres_data:

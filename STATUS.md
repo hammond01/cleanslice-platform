@@ -46,25 +46,22 @@
 - [ ] FileVersion entity (versioning support)
 - [ ] ShareLink entity (sharing with TTL)
 - [ ] UserQuota entity (quota management)
-- [ ] DeleteFile use case (soft delete)
+- [x] DeleteFile use case (soft delete)
 - [ ] RestoreFile use case
 - [ ] ShareFile, RevokeShare use cases
-- [ ] SearchFiles use case
-- [ ] Kafka producer (event publishing)
-- [ ] Events: FileDeleted, FileRestored, FileShared, FileShareRevoked
+- [x] SearchFiles use case
+- [x] Kafka producer (event publishing)
+- [x] Events: FileDeleted
+  - [ ] FileRestored
+  - [ ] FileShared
+  - [ ] FileShareRevoked
 
 ### Audit Service - Enhancements
 - [ ] Query filters (by actor, action, resource, date range)
 - [ ] Pagination support
 
 ### Product Service - Missing Features
-- [ ] Category entity
-- [ ] UpdateProduct use case
-- [ ] AddVariant use case
-- [ ] PublishProduct use case
-- [ ] SearchProducts use case
-- [ ] Kafka producer (event publishing)
-- [ ] Events: ProductUpdated, ProductPublished, VariantAdded, MediaAttached
+ [x] PublishProduct use case
 
 ### Security
 - [ ] Keycloak realm export file

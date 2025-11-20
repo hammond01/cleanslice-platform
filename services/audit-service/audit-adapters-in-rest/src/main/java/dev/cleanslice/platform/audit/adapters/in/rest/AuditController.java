@@ -20,7 +20,7 @@ public class AuditController {
         this.auditLogRepository = auditLogRepository;
     }
 
-    @GetMapping
+    @GetMapping("/logs")
     @Operation(summary = "Get all audit logs")
     public ResponseEntity<List<AuditLog>> getAllAuditLogs() {
         var logs = auditLogRepository.findAll();

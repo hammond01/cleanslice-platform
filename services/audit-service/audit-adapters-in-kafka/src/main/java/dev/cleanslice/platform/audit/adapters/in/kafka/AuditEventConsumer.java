@@ -21,7 +21,7 @@ public class AuditEventConsumer {
 
     @KafkaListener(topics = "files.events.v1", groupId = "audit-service")
     public void consumeFileEvent(FileUploadedEvent event) {
-        log.info("Received file event: FileUploadedEvent");
+        log.info("Received file event: FileUploadedEvent for file: {}", event.getFileId());
         
         var auditLog = new AuditLog(
                 "FileUploadedEvent",
@@ -37,9 +37,25 @@ public class AuditEventConsumer {
         log.info("Audit log saved for file: {}", event.getFileId());
     }
 
+    @KafkaListener(topics = "files.events.v1", groupId = "audit-service")
+    public void consumeFileDeletedEvent(dev.cleanslice.platform.common.events.FileDeletedEvent event) {
+        log.info("Received file event: FileDeletedEvent for file: {}", event.getFileId());
+        var auditLog = new AuditLog(
+                "FileDeletedEvent",
+                event.getFileId(),
+                "FILE",
+                null,
+                "FILE_DELETED",
+                String.format("File deleted: reason=%s", event.getReason()),
+                java.time.Instant.now()
+        );
+        auditLogRepository.save(auditLog);
+        log.info("Audit log saved for deleted file: {}", event.getFileId());
+    }
+
     @KafkaListener(topics = "products.events.v1", groupId = "audit-service")
     public void consumeProductEvent(ProductCreatedEvent event) {
-        log.info("Received product event: ProductCreatedEvent");
+        log.info("Received product event: ProductCreatedEvent for product: {}", event.getProductId());
         
         var auditLog = new AuditLog(
                 "ProductCreatedEvent",

@@ -19,6 +19,12 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/cleanslice
+          jwk-set-uri: http://localhost:8080/realms/cleanslice/protocol/openid-connect/certs
 
 server:
   port: 8084

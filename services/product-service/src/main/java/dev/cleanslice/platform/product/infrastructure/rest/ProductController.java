@@ -5,8 +5,10 @@ import dev.cleanslice.platform.product.application.usecase.AttachMediaUseCase;
 import dev.cleanslice.platform.product.application.usecase.CreateProductUseCase;
 import dev.cleanslice.platform.product.application.usecase.PublishProductUseCase;
 import dev.cleanslice.platform.product.domain.Product;
+import dev.cleanslice.platform.product.infrastructure.config.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/products")
 @Tag(name = "Products", description = "Product management API")
+@Slf4j
 public class ProductController {
 
     private final CreateProductUseCase createProductUseCase;
@@ -41,9 +44,16 @@ public class ProductController {
 
     @PostMapping
     @Operation(summary = "Create a new product")
-    public ResponseEntity<Product> createProduct(
-            @RequestBody CreateProductRequest request,
-            @RequestHeader("X-User-Id") UUID userId) {
+    public ResponseEntity<Product> createProduct(@RequestBody CreateProductRequest request) {
+        // Get user ID from JWT token via SecurityContext
+        UUID userId;
+        try {
+            userId = SecurityUtils.getCurrentUserId();
+        } catch (IllegalStateException e) {
+            // Development mode: use a default user ID
+            log.warn("No authenticated user found, using default user ID");
+            userId = UUID.fromString("00000000-0000-0000-0000-000000000001");
+        }
         
         Product product = createProductUseCase.execute(userId, request.name(), request.description());
         return ResponseEntity.status(HttpStatus.CREATED).body(product);

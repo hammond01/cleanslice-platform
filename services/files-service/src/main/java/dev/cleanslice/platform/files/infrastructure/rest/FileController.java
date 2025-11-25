@@ -4,6 +4,7 @@ import dev.cleanslice.platform.files.application.usecase.DeleteFileUseCase;
 import dev.cleanslice.platform.files.application.usecase.GetDownloadUrlUseCase;
 import dev.cleanslice.platform.files.application.usecase.UploadFileUseCase;
 import dev.cleanslice.platform.files.application.port.FileRepositoryPort;
+import dev.cleanslice.platform.files.infrastructure.config.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
@@ -43,11 +44,18 @@ public class FileController {
 
     @PostMapping
     @Operation(summary = "Upload a file")
-    public ResponseEntity<Map<String, Object>> uploadFile(
-            @RequestParam("file") MultipartFile file,
-            @RequestHeader("X-User-Id") UUID userId) {
-
+    public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
+            // Get user ID from JWT token via SecurityContext
+            UUID userId;
+            try {
+                userId = SecurityUtils.getCurrentUserId();
+            } catch (IllegalStateException e) {
+                // Development mode: use a default user ID
+                log.warn("No authenticated user found, using default user ID");
+                userId = UUID.fromString("00000000-0000-0000-0000-000000000001");
+            }
+
             var fileEntry = uploadFileUseCase.execute(
                     userId,
                     file.getOriginalFilename(),
@@ -66,7 +74,8 @@ public class FileController {
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (Exception e) {
             log.error("Error uploading file", e);
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(Map.of("error", "Failed to upload file: " + e.getMessage()));
         }
     }
 

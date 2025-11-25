@@ -28,6 +28,12 @@ spring:
     multipart:
       max-file-size: 100MB
       max-request-size: 100MB
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/cleanslice
+          jwk-set-uri: http://localhost:8080/realms/cleanslice/protocol/openid-connect/certs
 
 server:
   port: 8082
@@ -41,7 +47,7 @@ storage:
     bucket: files
     region: us-east-1
 
-# Security (disabled by default)
+# Security (disabled by default for development)
 security:
   enabled: false
 

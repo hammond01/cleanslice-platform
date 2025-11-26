@@ -8,11 +8,18 @@ A file-centric microservices platform with hexagonal architecture.
 .\start.ps1
 ```
 
+Then start Identity Service in a separate terminal:
+```powershell
+.\run-identity-local.ps1
+```
+
 Then access:
 - **API Gateway:** http://localhost:8081
+- **Identity Service:** http://localhost:8085/swagger-ui.html
 - **Files Service:** http://localhost:8082/swagger-ui.html
 - **Audit Service:** http://localhost:8083/swagger-ui.html  
 - **Product Service:** http://localhost:8084/swagger-ui.html
+- **Keycloak Admin:** http://localhost:8080 (admin/admin)
 - **MinIO Console:** http://localhost:9001 (minioadmin/minioadmin)
 - **Grafana:** http://localhost:3000 (admin/admin)
 
@@ -38,6 +45,11 @@ cleanslice-platform/
 
 ## 🎯 Core Services
 
+### Identity Service (Port 8085)
+- User registration and authentication
+- JWT token generation and validation
+- User management
+
 ### Files Service (Port 8082)
 - Upload files to MinIO/S3
 - Generate presigned download URLs
@@ -56,24 +68,41 @@ cleanslice-platform/
 
 ## 🧪 Test APIs
 
-**Upload a file:**
+**Register a new user:**
 ```powershell
+curl -X POST http://localhost:8085/api/auth/register `
+  -H "Content-Type: application/json" `
+  -d '{"username":"testuser","email":"test@example.com","password":"password123"}'
+```
+
+**Login to get JWT token:**
+```powershell
+curl -X POST http://localhost:8085/api/auth/login `
+  -H "Content-Type: application/json" `
+  -d '{"username":"testuser","password":"password123"}'
+# Returns: {"token":"jwt_token_here","tokenType":"Bearer"}
+```
+
+**Upload a file (using JWT token):**
+```powershell
+$token = "your_jwt_token_here"
 curl -X POST http://localhost:8082/api/files `
-  -H "X-User-Id: $(New-Guid)" `
+  -H "Authorization: Bearer $token" `
   -F "file=@test.png"
 ```
 
 **Get presigned download URL:**
 ```powershell
-curl -i http://localhost:8082/api/files/{fileId}/download
+curl -i http://localhost:8082/api/files/{fileId}/download `
+  -H "Authorization: Bearer $token"
 # Returns 302 redirect to MinIO presigned URL
 ```
 
 **Create product:**
 ```powershell
 curl -X POST http://localhost:8084/api/products `
+  -H "Authorization: Bearer $token" `
   -H "Content-Type: application/json" `
-  -H "X-User-Id: $(New-Guid)" `
   -d '{"name":"Test Product","description":"Description"}'
 ```
 

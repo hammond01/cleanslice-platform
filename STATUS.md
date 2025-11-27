@@ -20,6 +20,7 @@
 - [x] JPA adapter with PostgreSQL
 - [x] REST Controller (upload, download endpoints)
 - [x] Events: FileUploadedEvent
+- [x] Kafka producer (event publishing)
 
 ### Audit Service (BASIC - Runnable)
 - [x] Domain: AuditLog entity
@@ -32,6 +33,7 @@
 - [x] Use Cases: CreateProduct, AttachMedia
 - [x] JPA repository
 - [x] REST Controller (create, get, attach media)
+- [x] Kafka producer (event publishing)
 
 ### Gateway Service
 - [x] Spring Cloud Gateway
@@ -111,11 +113,10 @@
 
 1. **Test the current build** - Run `.\start.ps1` and verify all services start
 2. **Fix any startup issues** - Database connections, Kafka, MinIO
-3. **Add Kafka producers** - Files & Product services should publish events
+3. **Add remaining use cases** - ShareFile, DeleteFile, SearchFiles, etc.
 4. **Implement Security** - Resource Server + Mock profile
-5. **Add remaining use cases** - ShareFile, DeleteFile, SearchFiles, etc.
-6. **Testing** - Unit + Integration tests
-7. **Observability** - Custom metrics + OpenTelemetry
+5. **Testing** - Unit + Integration tests
+6. **Observability** - Custom metrics + OpenTelemetry
 
 ## 📊 Service Health Check
 

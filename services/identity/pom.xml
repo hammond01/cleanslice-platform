@@ -16,12 +16,6 @@
     <description>Identity Service - User authentication and authorization</description>
 
     <dependencies>
-        <!-- Common Libraries -->
-        <dependency>
-            <groupId>dev.cleanslice</groupId>
-            <artifactId>common-core</artifactId>
-        </dependency>
-
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

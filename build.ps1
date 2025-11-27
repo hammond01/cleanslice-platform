@@ -47,6 +47,3 @@ function Clean-Project {
     Write-Host "Cleaning project..." -ForegroundColor Green
     .\mvnw.cmd clean
 }
-
-# Export functions
-Export-ModuleMember -Function Build-Project, Package-Project, Start-Services, Stop-Services, Show-Logs, Run-Tests, Clean-Project

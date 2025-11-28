@@ -8,20 +8,22 @@ import java.time.Instant;
 import java.util.UUID;
 
 /**
- * JPA entity for file entries.
- * Separate from domain model to maintain clean architecture.
+ * JPA entity for file versions.
  */
 @Entity
-@Table(name = "file_entries")
+@Table(name = "file_versions")
 @Getter
 @Setter
-public class FileEntryEntity {
+public class FileVersionEntity {
 
     @Id
     private UUID id;
 
     @Column(nullable = false)
-    private UUID ownerId;
+    private UUID fileId;
+
+    @Column(nullable = false)
+    private int versionNumber;
 
     @Column(nullable = false, length = 255)
     private String name;
@@ -32,15 +34,12 @@ public class FileEntryEntity {
     @Column(nullable = false)
     private long size;
 
-    @Column(nullable = false)
-    private int currentVersion = 1;
+    @Column(nullable = false, length = 500)
+    private String storageKey;
 
     @Column(nullable = false)
     private Instant createdAt;
 
     @Column(nullable = false)
-    private Instant updatedAt;
-
-    @Column(nullable = false)
-    private boolean deleted = false;
+    private UUID createdBy;
 }

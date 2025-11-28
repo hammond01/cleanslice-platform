@@ -16,6 +16,7 @@ public class FileMapper {
         entity.setName(domain.getName());
         entity.setContentType(domain.getContentType());
         entity.setSize(domain.getSize());
+        entity.setCurrentVersion(domain.getCurrentVersion());
         entity.setCreatedAt(domain.getCreatedAt());
         entity.setUpdatedAt(domain.getUpdatedAt());
         entity.setDeleted(domain.isDeleted());
@@ -29,6 +30,7 @@ public class FileMapper {
                 entity.getName(),
                 entity.getContentType(),
                 entity.getSize(),
+                entity.getCurrentVersion(),
                 entity.getCreatedAt(),
                 entity.getUpdatedAt(),
                 entity.isDeleted()

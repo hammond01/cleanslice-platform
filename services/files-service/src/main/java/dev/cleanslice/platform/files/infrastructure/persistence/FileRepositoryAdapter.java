@@ -35,6 +35,11 @@ public class FileRepositoryAdapter implements FileRepositoryPort {
     }
 
     @Override
+    public Optional<FileEntry> findByOwnerIdAndName(UUID ownerId, String name) {
+        return jpaRepository.findByOwnerIdAndName(ownerId, name).map(mapper::toDomain);
+    }
+
+    @Override
     public List<FileEntry> findByOwnerId(UUID ownerId) {
         return jpaRepository.findByOwnerId(ownerId).stream().map(mapper::toDomain).toList();
     }

@@ -28,7 +28,12 @@ public class GetDownloadUrlUseCase {
             throw new IllegalArgumentException("File is deleted");
         }
 
+        // Generate storage key based on current version
+        String storageKey = fileEntry.getCurrentVersion() == 1
+                ? fileId.toString()
+                : fileId + "/v" + fileEntry.getCurrentVersion();
+
         // Generate presigned URL with 1 hour TTL
-        return storagePort.getPresignedReadUrl(fileId, 3600);
+        return storagePort.generatePresignedDownloadUrl(storageKey);
     }
 }

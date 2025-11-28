@@ -12,6 +12,7 @@ import java.util.UUID;
 public interface FileRepositoryPort {
     FileEntry save(FileEntry fileEntry);
     Optional<FileEntry> findById(UUID id);
+    Optional<FileEntry> findByOwnerIdAndName(UUID ownerId, String name);
     List<FileEntry> findByOwnerId(UUID ownerId);
     List<FileEntry> search(String name, String tag, String type);
     void delete(UUID id);

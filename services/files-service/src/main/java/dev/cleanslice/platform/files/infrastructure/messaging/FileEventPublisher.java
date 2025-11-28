@@ -2,7 +2,9 @@ package dev.cleanslice.platform.files.infrastructure.messaging;
 
 import dev.cleanslice.platform.files.application.port.FileEventPublisherPort;
 import dev.cleanslice.platform.files.domain.FileEntry;
+import dev.cleanslice.platform.files.domain.FileVersion;
 import dev.cleanslice.platform.common.events.FileUploadedEvent;
+import dev.cleanslice.platform.common.events.FileVersionUploadedEvent;
 import dev.cleanslice.platform.common.events.FileDeletedEvent;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -36,6 +38,23 @@ public class FileEventPublisher implements FileEventPublisherPort {
 
         ProducerRecord<String, Object> rec = new ProducerRecord<>(TOPIC, fileEntry.getId().toString(), event);
         rec.headers().add("__TypeId__", FileUploadedEvent.class.getName().getBytes(StandardCharsets.UTF_8));
+        kafkaTemplate.send(rec);
+    }
+
+    @Override
+    public void publishFileVersionUploaded(FileVersion fileVersion) {
+        var event = new FileVersionUploadedEvent(
+            fileVersion.getFileId(),
+            fileVersion.getId(),
+            fileVersion.getVersionNumber(),
+            fileVersion.getCreatedBy(),
+            fileVersion.getName(),
+            fileVersion.getContentType(),
+            fileVersion.getSize()
+        );
+
+        ProducerRecord<String, Object> rec = new ProducerRecord<>(TOPIC, fileVersion.getFileId().toString(), event);
+        rec.headers().add("__TypeId__", FileVersionUploadedEvent.class.getName().getBytes(StandardCharsets.UTF_8));
         kafkaTemplate.send(rec);
     }
 

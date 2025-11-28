@@ -67,10 +67,10 @@ public class S3StorageAdapter implements StoragePort {
     }
 
     @Override
-    public void put(UUID fileId, InputStream content, long size, String contentType) {
+    public void put(String storageKey, InputStream content, long size, String contentType) {
         var putRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
-                .key(fileId.toString())
+                .key(storageKey)
                 .contentType(contentType)
                 .contentLength(size)
                 .build();
@@ -79,29 +79,29 @@ public class S3StorageAdapter implements StoragePort {
     }
 
     @Override
-    public InputStream get(UUID fileId) {
+    public InputStream get(String storageKey) {
         var getRequest = GetObjectRequest.builder()
                 .bucket(bucketName)
-                .key(fileId.toString())
+                .key(storageKey)
                 .build();
 
         return s3Client.getObject(getRequest);
     }
 
     @Override
-    public void delete(UUID fileId) {
-        s3Client.deleteObject(b -> b.bucket(bucketName).key(fileId.toString()));
+    public void delete(String storageKey) {
+        s3Client.deleteObject(b -> b.bucket(bucketName).key(storageKey));
     }
 
     @Override
-    public String getPresignedReadUrl(UUID fileId, long ttlSeconds) {
+    public String generatePresignedDownloadUrl(String storageKey) {
         var getObjectRequest = GetObjectRequest.builder()
                 .bucket(bucketName)
-                .key(fileId.toString())
+                .key(storageKey)
                 .build();
 
         var presignRequest = GetObjectPresignRequest.builder()
-                .signatureDuration(Duration.ofSeconds(ttlSeconds))
+                .signatureDuration(Duration.ofSeconds(3600)) // 1 hour
                 .getObjectRequest(getObjectRequest)
                 .build();
 
@@ -109,11 +109,11 @@ public class S3StorageAdapter implements StoragePort {
     }
 
     @Override
-    public boolean exists(UUID fileId) {
+    public boolean exists(String storageKey) {
         try {
             var headRequest = HeadObjectRequest.builder()
                     .bucket(bucketName)
-                    .key(fileId.toString())
+                    .key(storageKey)
                     .build();
             s3Client.headObject(headRequest);
             return true;

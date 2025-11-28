@@ -7,9 +7,9 @@ import java.util.UUID;
  * Output port for S3/MinIO storage operations.
  */
 public interface StoragePort {
-    void put(UUID fileId, InputStream content, long size, String contentType);
-    InputStream get(UUID fileId);
-    void delete(UUID fileId);
-    String getPresignedReadUrl(UUID fileId, long ttlSeconds);
-    boolean exists(UUID fileId);
+    void put(String storageKey, InputStream content, long size, String contentType);
+    InputStream get(String storageKey);
+    void delete(String storageKey);
+    String generatePresignedDownloadUrl(String storageKey);
+    boolean exists(String storageKey);
 }

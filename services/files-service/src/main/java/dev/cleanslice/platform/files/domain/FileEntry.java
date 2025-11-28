@@ -13,18 +13,20 @@ public class FileEntry {
     private final String name;
     private final String contentType;
     private final long size;
+    private final int currentVersion;
     private final Instant createdAt;
     private final Instant updatedAt;
     private final boolean deleted;
 
     // Full constructor for reconstruction
     public FileEntry(UUID id, UUID ownerId, String name, String contentType, long size,
-                    Instant createdAt, Instant updatedAt, boolean deleted) {
+                    int currentVersion, Instant createdAt, Instant updatedAt, boolean deleted) {
         this.id = id;
         this.ownerId = ownerId;
         this.name = name;
         this.contentType = contentType;
         this.size = size;
+        this.currentVersion = currentVersion;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
         this.deleted = deleted;
@@ -33,16 +35,20 @@ public class FileEntry {
     // Factory method for new files
     public static FileEntry create(UUID ownerId, String name, String contentType, long size) {
         var now = Instant.now();
-        return new FileEntry(UUID.randomUUID(), ownerId, name, contentType, size, now, now, false);
+        return new FileEntry(UUID.randomUUID(), ownerId, name, contentType, size, 1, now, now, false);
     }
 
     // Business methods
     public FileEntry markDeleted() {
-        return new FileEntry(id, ownerId, name, contentType, size, createdAt, Instant.now(), true);
+        return new FileEntry(id, ownerId, name, contentType, size, currentVersion, createdAt, Instant.now(), true);
     }
 
     public FileEntry restore() {
-        return new FileEntry(id, ownerId, name, contentType, size, createdAt, Instant.now(), false);
+        return new FileEntry(id, ownerId, name, contentType, size, currentVersion, createdAt, Instant.now(), false);
+    }
+
+    public FileEntry updateToNewVersion(String newName, String newContentType, long newSize, int newVersion) {
+        return new FileEntry(id, ownerId, newName, newContentType, newSize, newVersion, createdAt, Instant.now(), false);
     }
 
     // Getters
@@ -51,6 +57,7 @@ public class FileEntry {
     public String getName() { return name; }
     public String getContentType() { return contentType; }
     public long getSize() { return size; }
+    public int getCurrentVersion() { return currentVersion; }
     public Instant getCreatedAt() { return createdAt; }
     public Instant getUpdatedAt() { return updatedAt; }
     public boolean isDeleted() { return deleted; }

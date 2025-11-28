@@ -2,6 +2,9 @@ package dev.cleanslice.platform.files.infrastructure.rest;
 
 import dev.cleanslice.platform.files.application.usecase.DeleteFileUseCase;
 import dev.cleanslice.platform.files.application.usecase.GetDownloadUrlUseCase;
+import dev.cleanslice.platform.files.application.usecase.GetFileVersionDownloadUrlUseCase;
+import dev.cleanslice.platform.files.application.usecase.GetFileVersionsUseCase;
+import dev.cleanslice.platform.files.application.usecase.RestoreFileVersionUseCase;
 import dev.cleanslice.platform.files.application.usecase.UploadFileUseCase;
 import dev.cleanslice.platform.files.application.port.FileRepositoryPort;
 import dev.cleanslice.platform.files.infrastructure.config.SecurityUtils;
@@ -29,15 +32,24 @@ public class FileController {
 
     private final UploadFileUseCase uploadFileUseCase;
     private final GetDownloadUrlUseCase getDownloadUrlUseCase;
+    private final GetFileVersionsUseCase getFileVersionsUseCase;
+    private final GetFileVersionDownloadUrlUseCase getFileVersionDownloadUrlUseCase;
+    private final RestoreFileVersionUseCase restoreFileVersionUseCase;
     private final DeleteFileUseCase deleteFileUseCase;
     private final FileRepositoryPort fileRepositoryPort;
 
     public FileController(UploadFileUseCase uploadFileUseCase,
                          GetDownloadUrlUseCase getDownloadUrlUseCase,
+                         GetFileVersionsUseCase getFileVersionsUseCase,
+                         GetFileVersionDownloadUrlUseCase getFileVersionDownloadUrlUseCase,
+                         RestoreFileVersionUseCase restoreFileVersionUseCase,
                          DeleteFileUseCase deleteFileUseCase,
                          FileRepositoryPort fileRepositoryPort) {
         this.uploadFileUseCase = uploadFileUseCase;
         this.getDownloadUrlUseCase = getDownloadUrlUseCase;
+        this.getFileVersionsUseCase = getFileVersionsUseCase;
+        this.getFileVersionDownloadUrlUseCase = getFileVersionDownloadUrlUseCase;
+        this.restoreFileVersionUseCase = restoreFileVersionUseCase;
         this.deleteFileUseCase = deleteFileUseCase;
         this.fileRepositoryPort = fileRepositoryPort;
     }
@@ -130,5 +142,52 @@ public class FileController {
                 "createdAt", file.getCreatedAt().toString()
         )).toList();
         return ResponseEntity.ok(results);
+    }
+
+    @GetMapping("/{id}/versions")
+    @Operation(summary = "Get all versions of a file")
+    public ResponseEntity<List<Map<String, Object>>> getFileVersions(@PathVariable UUID id) {
+        var versions = getFileVersionsUseCase.execute(id);
+        var results = versions.stream().map(version -> Map.<String, Object>of(
+                "versionId", version.getId().toString(),
+                "versionNumber", version.getVersionNumber(),
+                "filename", version.getName(),
+                "size", version.getSize(),
+                "contentType", version.getContentType(),
+                "createdAt", version.getCreatedAt().toString(),
+                "createdBy", version.getCreatedBy().toString()
+        )).toList();
+        return ResponseEntity.ok(results);
+    }
+
+    @GetMapping("/version/{versionId}/download")
+    @Operation(summary = "Get download URL for a specific file version")
+    public ResponseEntity<Void> getFileVersionDownloadUrl(@PathVariable UUID versionId) {
+        try {
+            var presignedUrl = getFileVersionDownloadUrlUseCase.execute(versionId);
+            return ResponseEntity.status(HttpStatus.FOUND)
+                    .header(HttpHeaders.LOCATION, presignedUrl)
+                    .build();
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/{id}/restore/{versionNumber}")
+    @Operation(summary = "Restore file to a specific version")
+    public ResponseEntity<Map<String, Object>> restoreFileVersion(@PathVariable UUID id, @PathVariable int versionNumber) {
+        try {
+            var restoredFile = restoreFileVersionUseCase.execute(id, versionNumber);
+            Map<String, Object> response = Map.of(
+                    "fileId", restoredFile.getId().toString(),
+                    "filename", restoredFile.getName(),
+                    "currentVersion", restoredFile.getCurrentVersion(),
+                    "size", restoredFile.getSize(),
+                    "contentType", restoredFile.getContentType()
+            );
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        }
     }
 }

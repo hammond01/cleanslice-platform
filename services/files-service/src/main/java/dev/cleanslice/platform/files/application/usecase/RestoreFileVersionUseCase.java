@@ -5,6 +5,7 @@ import dev.cleanslice.platform.files.application.port.FileVersionRepositoryPort;
 import dev.cleanslice.platform.files.domain.FileEntry;
 import dev.cleanslice.platform.files.domain.FileVersion;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import java.util.UUID;
  * Use case for restoring a file to a specific version.
  */
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class RestoreFileVersionUseCase {
 
@@ -39,6 +41,8 @@ public class RestoreFileVersionUseCase {
                 versionNumber
         );
 
-        return fileRepository.save(updatedFile);
+                var saved = fileRepository.save(updatedFile);
+                log.info("Restored file {} to version {}", fileId, versionNumber);
+                return saved;
     }
 }

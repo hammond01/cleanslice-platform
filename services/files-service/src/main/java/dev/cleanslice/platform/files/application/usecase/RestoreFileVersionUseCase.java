@@ -3,7 +3,6 @@ package dev.cleanslice.platform.files.application.usecase;
 import dev.cleanslice.platform.files.application.port.FileRepositoryPort;
 import dev.cleanslice.platform.files.application.port.FileVersionRepositoryPort;
 import dev.cleanslice.platform.files.domain.FileEntry;
-import dev.cleanslice.platform.files.domain.FileVersion;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

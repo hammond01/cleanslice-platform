@@ -3,6 +3,7 @@ package dev.cleanslice.platform.files.infrastructure.rest;
 import dev.cleanslice.platform.files.application.usecase.DeleteFileUseCase;
 import dev.cleanslice.platform.files.application.usecase.GetDownloadUrlUseCase;
 import dev.cleanslice.platform.files.application.usecase.GetFileVersionDownloadUrlUseCase;
+import dev.cleanslice.platform.files.application.usecase.GetFileVersionUseCase;
 import dev.cleanslice.platform.files.application.usecase.GetFileVersionsUseCase;
 import dev.cleanslice.platform.files.application.usecase.RestoreFileVersionUseCase;
 import dev.cleanslice.platform.files.application.usecase.UploadFileUseCase;
@@ -34,6 +35,7 @@ public class FileController {
     private final GetDownloadUrlUseCase getDownloadUrlUseCase;
     private final GetFileVersionsUseCase getFileVersionsUseCase;
     private final GetFileVersionDownloadUrlUseCase getFileVersionDownloadUrlUseCase;
+    private final GetFileVersionUseCase getFileVersionUseCase;
     private final RestoreFileVersionUseCase restoreFileVersionUseCase;
     private final DeleteFileUseCase deleteFileUseCase;
     private final FileRepositoryPort fileRepositoryPort;
@@ -44,14 +46,37 @@ public class FileController {
                          GetFileVersionDownloadUrlUseCase getFileVersionDownloadUrlUseCase,
                          RestoreFileVersionUseCase restoreFileVersionUseCase,
                          DeleteFileUseCase deleteFileUseCase,
-                         FileRepositoryPort fileRepositoryPort) {
+                         FileRepositoryPort fileRepositoryPort,
+                         GetFileVersionUseCase getFileVersionUseCase) {
         this.uploadFileUseCase = uploadFileUseCase;
         this.getDownloadUrlUseCase = getDownloadUrlUseCase;
         this.getFileVersionsUseCase = getFileVersionsUseCase;
         this.getFileVersionDownloadUrlUseCase = getFileVersionDownloadUrlUseCase;
+        this.getFileVersionUseCase = getFileVersionUseCase;
         this.restoreFileVersionUseCase = restoreFileVersionUseCase;
         this.deleteFileUseCase = deleteFileUseCase;
         this.fileRepositoryPort = fileRepositoryPort;
+    }
+
+    @GetMapping("/version/{versionId}")
+    @Operation(summary = "Get metadata for a specific file version")
+    public ResponseEntity<Map<String, Object>> getFileVersion(@PathVariable UUID versionId) {
+        try {
+            var version = getFileVersionUseCase.execute(versionId);
+            Map<String, Object> response = Map.of(
+                    "versionId", version.getId().toString(),
+                    "fileId", version.getFileId().toString(),
+                    "versionNumber", version.getVersionNumber(),
+                    "filename", version.getName(),
+                    "size", version.getSize(),
+                    "contentType", version.getContentType(),
+                    "createdAt", version.getCreatedAt().toString(),
+                    "createdBy", version.getCreatedBy().toString()
+            );
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping

@@ -56,6 +56,36 @@ cleanslice-platform/
 - File versioning & metadata
 - Soft delete/restore
 
+#### File Versioning (examples)
+You can work with file versions using the Files Service API:
+
+- Upload a file to create a version (or a new one if the file exists):
+```powershell
+curl -X POST http://localhost:8082/api/files \
+  -F "file=@test.txt"
+```
+
+- List available versions for a file:
+```powershell
+curl http://localhost:8082/api/files/{fileId}/versions
+```
+
+- Get metadata for a specific version:
+```powershell
+curl http://localhost:8082/api/files/version/{versionId}
+```
+
+- Get presigned download URL for a specific version:
+```powershell
+curl -i http://localhost:8082/api/files/version/{versionId}/download
+```
+
+- Restore a file to a previous version:
+```powershell
+curl -X POST http://localhost:8082/api/files/{fileId}/restore/{versionNumber}
+```
+
+
 ### Audit Service (Port 8083)
 - Consume events from Kafka
 - Store audit logs

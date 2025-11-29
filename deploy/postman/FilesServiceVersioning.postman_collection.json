@@ -1,0 +1,79 @@
+{
+  "info": {
+    "name": "Files Service - Versioning",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Collection for testing file versioning endpoints"
+  },
+  "item": [
+    {
+      "name": "Upload File (create version)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": "{{file_path}}"
+            }
+          ]
+        },
+        "url": "{{baseUrl}}/api/files"
+      },
+      "response": []
+    },
+    {
+      "name": "Get Files by Owner",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/files/owner/{{ownerId}}"
+      }
+    },
+    {
+      "name": "Search Files",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/files/search?name={{name}}&type={{type}}"
+      }
+    },
+    {
+      "name": "Get Download URL (current version)",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/files/{{fileId}}/download"
+      }
+    },
+    {
+      "name": "List File Versions",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/files/{{fileId}}/versions"
+      }
+    },
+    {
+      "name": "Get Version Download URL",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/files/version/{{versionId}}/download"
+      }
+    },
+    {
+      "name": "Restore File to Version",
+      "request": {
+        "method": "POST",
+        "url": "{{baseUrl}}/api/files/{{fileId}}/restore/{{versionNumber}}"
+      }
+    },
+    {
+      "name": "Delete File (soft)",
+      "request": {
+        "method": "DELETE",
+        "url": "{{baseUrl}}/api/files/{{fileId}}"
+      }
+    }
+  ],
+  "event": [],
+  "protocolProfileBehavior": {}
+}

@@ -60,6 +60,13 @@
       }
     },
     {
+      "name": "Get Version Metadata",
+      "request": {
+        "method": "GET",
+        "url": "{{baseUrl}}/api/files/version/{{versionId}}"
+      }
+    },
+    {
       "name": "Restore File to Version",
       "request": {
         "method": "POST",

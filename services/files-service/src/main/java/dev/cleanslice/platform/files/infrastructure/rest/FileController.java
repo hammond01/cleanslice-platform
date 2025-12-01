@@ -11,6 +11,7 @@ import dev.cleanslice.platform.files.application.port.FileRepositoryPort;
 import dev.cleanslice.platform.files.infrastructure.config.SecurityUtils;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import java.util.UUID;
 @RequestMapping("/api/files")
 @Tag(name = "Files", description = "File management API")
 @Slf4j
+@RequiredArgsConstructor
 public class FileController {
 
     private final UploadFileUseCase uploadFileUseCase;
@@ -40,24 +42,26 @@ public class FileController {
     private final FileRepositoryPort fileRepositoryPort;
     private final FileMapper fileMapper;
 
-    public FileController(UploadFileUseCase uploadFileUseCase,
-                         GetDownloadUrlUseCase getDownloadUrlUseCase,
-                         GetFileVersionsUseCase getFileVersionsUseCase,
-                         GetFileVersionDownloadUrlUseCase getFileVersionDownloadUrlUseCase,
-                         GetFileVersionUseCase getFileVersionUseCase,
-                         RestoreFileVersionUseCase restoreFileVersionUseCase,
-                         DeleteFileUseCase deleteFileUseCase,
-                         FileRepositoryPort fileRepositoryPort,
-                         FileMapper fileMapper) {
-        this.uploadFileUseCase = uploadFileUseCase;
-        this.getDownloadUrlUseCase = getDownloadUrlUseCase;
-        this.getFileVersionsUseCase = getFileVersionsUseCase;
-        this.getFileVersionDownloadUrlUseCase = getFileVersionDownloadUrlUseCase;
-        this.getFileVersionUseCase = getFileVersionUseCase;
-        this.restoreFileVersionUseCase = restoreFileVersionUseCase;
-        this.deleteFileUseCase = deleteFileUseCase;
-        this.fileRepositoryPort = fileRepositoryPort;
-        this.fileMapper = fileMapper;
+    private static final UUID DEFAULT_USER_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
+
+    private UUID getCurrentUserId() {
+        try {
+            return SecurityUtils.getCurrentUserId();
+        } catch (IllegalStateException e) {
+            log.warn("No authenticated user found, using default user ID");
+            return DEFAULT_USER_ID;
+        }
+    }
+
+    private <T> ResponseEntity<T> handleNotFound(IllegalArgumentException e) {
+        log.debug("Resource not found: {}", e.getMessage());
+        return ResponseEntity.notFound().build();
+    }
+
+    private ResponseEntity<Void> handleDownloadUrl(String url) {
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .header(HttpHeaders.LOCATION, url)
+                .build();
     }
 
     @GetMapping("/version/{versionId}")
@@ -75,16 +79,7 @@ public class FileController {
     @Operation(summary = "Upload a file")
     public ResponseEntity<FileDtos.UploadResponse> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
-            // Get user ID from JWT token via SecurityContext
-            UUID userId;
-            try {
-                userId = SecurityUtils.getCurrentUserId();
-            } catch (IllegalStateException e) {
-                // Development mode: use a default user ID
-                log.warn("No authenticated user found, using default user ID");
-                userId = UUID.fromString("00000000-0000-0000-0000-000000000001");
-            }
-
+            var userId = getCurrentUserId();
             var fileEntry = uploadFileUseCase.execute(
                     userId,
                     file.getOriginalFilename(),
@@ -92,7 +87,6 @@ public class FileController {
                     file.getSize(),
                     file.getInputStream()
             );
-
             return ResponseEntity.status(HttpStatus.CREATED).body(fileMapper.toUploadResponse(fileEntry));
         } catch (Exception e) {
             log.error("Error uploading file", e);
@@ -105,11 +99,9 @@ public class FileController {
     public ResponseEntity<Void> getDownloadUrl(@PathVariable UUID id) {
         try {
             var presignedUrl = getDownloadUrlUseCase.execute(id);
-            return ResponseEntity.status(HttpStatus.FOUND)
-                    .header(HttpHeaders.LOCATION, presignedUrl)
-                    .build();
+            return handleDownloadUrl(presignedUrl);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
+            return handleNotFound();
         }
     }
 
@@ -120,7 +112,7 @@ public class FileController {
             deleteFileUseCase.execute(id);
             return ResponseEntity.noContent().build();
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
+            return handleNotFound();
         }
     }
 
@@ -154,11 +146,9 @@ public class FileController {
     public ResponseEntity<Void> getFileVersionDownloadUrl(@PathVariable UUID versionId) {
         try {
             var presignedUrl = getFileVersionDownloadUrlUseCase.execute(versionId);
-            return ResponseEntity.status(HttpStatus.FOUND)
-                    .header(HttpHeaders.LOCATION, presignedUrl)
-                    .build();
+            return handleDownloadUrl(presignedUrl);
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.notFound().build();
+            return handleNotFound();
         }
     }
 

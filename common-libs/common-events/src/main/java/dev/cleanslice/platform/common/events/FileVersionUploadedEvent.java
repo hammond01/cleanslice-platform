@@ -1,6 +1,5 @@
 package dev.cleanslice.platform.common.events;
 
-import java.time.Instant;
 import java.util.UUID;
 
 /**

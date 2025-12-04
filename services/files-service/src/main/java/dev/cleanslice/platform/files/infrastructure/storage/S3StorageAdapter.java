@@ -17,7 +17,6 @@ import software.amazon.awssdk.services.s3.presigner.model.GetObjectPresignReques
 import java.io.InputStream;
 import java.net.URI;
 import java.time.Duration;
-import java.util.UUID;
 
 /**
  * Adapter for S3/MinIO storage operations.

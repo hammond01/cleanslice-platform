@@ -74,12 +74,22 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-security</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-jpa</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-r2dbc</artifactId>
                 <version>${spring-boot.version}</version>
             </dependency>
             <dependency>
@@ -133,6 +143,11 @@
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>r2dbc-postgresql</artifactId>
+                <version>1.0.4.RELEASE</version>
             </dependency>
 
             <!-- OpenAPI -->

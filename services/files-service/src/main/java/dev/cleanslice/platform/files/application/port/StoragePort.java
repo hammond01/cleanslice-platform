@@ -1,7 +1,6 @@
 package dev.cleanslice.platform.files.application.port;
 
 import java.io.InputStream;
-import java.util.UUID;
 
 /**
  * Output port for S3/MinIO storage operations.

@@ -101,7 +101,7 @@ public class FileController {
             var presignedUrl = getDownloadUrlUseCase.execute(id);
             return handleDownloadUrl(presignedUrl);
         } catch (IllegalArgumentException e) {
-            return handleNotFound();
+            return handleNotFound(e);
         }
     }
 
@@ -112,7 +112,7 @@ public class FileController {
             deleteFileUseCase.execute(id);
             return ResponseEntity.noContent().build();
         } catch (IllegalArgumentException e) {
-            return handleNotFound();
+            return handleNotFound(e);
         }
     }
 
@@ -148,7 +148,7 @@ public class FileController {
             var presignedUrl = getFileVersionDownloadUrlUseCase.execute(versionId);
             return handleDownloadUrl(presignedUrl);
         } catch (IllegalArgumentException e) {
-            return handleNotFound();
+            return handleNotFound(e);
         }
     }
 
